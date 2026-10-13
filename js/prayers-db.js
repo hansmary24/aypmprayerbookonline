@@ -1,7 +1,6 @@
 const prayerDB = {
   "morningOffering": {
     "title": "1. Morning Offering",
-    "section": "I. MORNING PRAYER",
     "en": `O Jesus, through the Immaculate Heart of Mary, I offer you my prayers, works, joys, and sufferings of this day, for all the intentions of your Sacred Heart, in union with the Holy Sacrifice of the Mass throughout the world, for the salvation of souls, the reparation of sins, and the reunion of all Christians.
 
 In a special way, I pray... FOR THE SOULS OF: (names in the AYPM Dashboard), FOR THE SPECIAL INTENTIONS OF: (names in the AYPM Dashboard), FOR THE DELIVERANCE, LIBERATION, AND HEALING OF: (names in the AYPM Dashboard) and in particular for the intentions of the Holy Father this month.
@@ -16,7 +15,6 @@ Amen.`
 
   "ivanMerzFamily": {
     "title": "2. Daily Prayer of the Blessed Ivan Merz Family",
-    "section": "I. MORNING PRAYER",
     "en": `Lord, hear my prayer and let my cry come unto you.
 
 I humbly bow before you, Almighty and Loving God, to implore your mercy, love, and protection for the Cause for the Canonization of Blessed Ivan Merz and its apostolates here in the Philippines, my spiritual family. May you always be our leader and guide in our efforts for your Holy Church and the expansion of your Kingdom. Lord Jesus Christ, in your mercy, dispel all curses, hexes, spells, evil tongues, evil intentions, rumors, and gossip that may hinder our mission to sanctify and save souls.
@@ -39,7 +37,6 @@ Benedicat nos Dominus, et ab omni malo defendat, et perducat nos ad vitam aetern
 
   "statesOfLife": {
     "title": "3. Prayers for Each State of Life",
-    "section": "I. MORNING PRAYER",
     "en": `FOR SINGLE LAYPERSONS:
 God the Father, Source of all love, I thank You for this season of singleness. Teach me to see it as Your gift: a time of preparation and purpose within Your will. Lord Jesus Christ, my true Friend and Redeemer, sanctify my heart and purify my desires. Turn my solitude into communion and my longing into prayer, that I may seek You above all. Holy Spirit, Consoler and Guide, fill my days with Your light. Strengthen me to serve with joy and follow the path You have prepared for me. Amen.
 
@@ -54,14 +51,31 @@ Deus Pater, Fons omnis amoris, gratias tibi ago pro hoc tempore caelibatus. Doce
 
   "spiritualCommunion": {
     "title": "5. Spiritual Communion",
-    "section": "I. MORNING PRAYER",
     "en": `My Jesus, I believe that You are present in the Most Holy Sacrament. I love You above all things, and I desire to receive You into my soul. Since I cannot at this moment receive You sacramentally, come at least spiritually into my heart. I embrace You as if You were already there and unite myself wholly to You. Never permit me to be separated from You. Amen.`,
     "la": `Iesu mi, credo te esse praesentem in Sanctissimo Sacramento. Amo te super omnia et desidero te in animam meam recipere. Quoniam te nunc sacramentaliter recipere nequeo, veni saltem spiritualiter in cor meum. Ut iam praesentem te amplector et me totum tibi unio; ne permittas me umquam a te separari. Amen.`
   },
 
+  "deliveranceProtection": {
+    "title": "6. Prayers for Deliverance and Liberation",
+    "en": `6a. DEPRECATORY STATEMENT:
+Most Holy Trinity Father +, Son, and Holy Spirit through the intercession of the Blessed Virgin Mary, together with all the angels and saints, we humbly beg Your mercy. Please apply and extend the petitions of these prayers to (names in dashboard, mentioned one-by-one). Grant us the grace to bear the burdens and embrace the sacrifices required for the deliverance and salvation of (names in dashboard, mentioned one-by-one). Through Christ our Lord. Amen.
+
+6b. SEALING PROTECTION PRAYER:
+V. Heavenly Father, in the holy and powerful Name of our Lord Jesus Christ, we humbly plead for Your mercy. Please seal, cover, and protect all of our places, our home, and all persons especially those whom we promised to pray for and possessions within it, in the Most Precious Blood of our Lord Jesus Christ. We also invoke the maternal mantle of love and protection of the Blessed Virgin Mary, our Mother, to shield all people and this place from all harm and evil, together with the prayers and presence of all the holy Angels and Saints.
+R. Amen.
+
+6c. BINDING PRAYER:
+V. Heavenly Father, in the holy and powerful Name of our Lord Jesus Christ, we humbly plead for Your mercy to bind all evil spirits, all demonic forces, and all evil entities—together with their lies, influence, power, attributes, and any form of communication or spiritual transference. We beg You to forbid them from drawing reinforcements, causing hindrances, blockages, or retaliation in any way. Command all evil spirits to depart silently and immediately from this place, never to retaliate, return, leave residue, or be replaced.
+R. Amen.
+
+6d. PRAYER AGAINST RETALIATION:
+Lord Jesus Christ, in Your infinite love and mercy, we implore You to pour forth Your Most Precious Blood over us and Your servants, especially those whom we promised to pray for, so that no demon, disembodied spirit, or evil power may retaliate against us... Amen.`,
+    "la": `6a. DECLARATIO DEPRECATORIA:
+Sanctissima Trinitas Pater +, Filius, et Spiritus Sanctus, per intercessionem Beatae Mariae Virginis, cum omnibus angelis et sanctis, humiliter misericordiam tuam petimus... Amen.`
+  },
+
   "eveningOffering": {
     "title": "1. Evening Offering",
-    "section": "II. EVENING PRAYER",
     "en": `Lord Jesus, my Light and my Rest, as this day draws to a close, I kneel before You in silence and surrender. I thank You for every grace, every trial, every moment You allowed me to walk with You today. If I have served You faithfully, I give You all the glory. If I have failed You, I ask for Your mercy. Cleanse me and teach me to begin again.
 
 In the spirit of Blessed Ivan Merz, I examine my heart with truth: Where did I seek myself instead of You? Where did I choose comfort over sacrifice, pleasure over purity, pride over humility? "How far I am from perfection," Ivan once wrote. And yet, like him, I believe that You can take even the mud of my soul and form it into something beautiful.
@@ -78,7 +92,6 @@ Iesu, tuus sum. Accipe diem meum. Renova cor meum. Para me ad Caelum. Amen.`
 
   "opLitany": {
     "title": "5. Litany of the Order of Preachers",
-    "section": "II. EVENING PRAYER",
     "en": `Prayer Before the Litany:
 O Most Holy Trinity, Father, Son, and Holy Spirit, through the powerful intercession of the Blessed Virgin Mary, Mother of God and Mother of the Church, we humbly beg You to look with mercy upon Your servants and handmaids whom we promised to pray for...
 
@@ -327,19 +340,17 @@ V. Ora pro nobis, Sancta Dei Genítrix.
 R. Ut digni efficiámur promissiónibus Christi.
 
 Orémus.
-Defénde, quæsumus, Dómine Deus, intercedénte beáta et gloriósa Dei Genetríce María cum ómnibus Sanctis tuis, nostram ab omni adversitáte Domum et Ordinem, et ab hóstium tuére cleménter insidiis. Per Christum Dóminum nostrum. Amen.`
+Defénde, quæsumus, Dómine Deus, intercedénte beáta et gloriósa Dei Genetríce María cum ómnibus Sanctis tuis, nostram ab omni adversitáte Domum et Ordinem, et ab hóstium tuére clemérter insidiis. Per Christum Dóminum nostrum. Amen.`
   },
 
   "actOfContrition": {
     "title": "I. Act of Contrition",
-    "section": "III. SPECIAL PRAYERS IN EMERGENCIES",
     "en": `My God, I am sorry for my sins with all my heart. In choosing to do wrong and failing to do good, I have sinned against you whom I should love above all things. I firmly intend, with your help, to do penance, to sin no more, and to avoid whatever leads me to sin. Our Savior Jesus Christ suffered and died for the Blessed Ivan Merz Family. In his name, my God, have mercy. Amen.`,
     "la": `Deus meus, ex toto corde me poenitet omnium meorum peccatorum, eaque detestor, quia peccando iustas tuas poenas merui, et super omnia te offendi, quem super omnia diligere debeo. Firmiter propono, adjuvante gratia tua, de cetero non peccare proximasque peccandi occasiones fugere. Amen.`
   },
 
   "chapletIvanMerz": {
     "title": "V. Chaplet of Blessed Ivan Merz",
-    "section": "III. SPECIAL PRAYERS IN EMERGENCIES",
     "en": `1. Make the Sign of the Cross
 2. Our Father
 3. Hail Mary
