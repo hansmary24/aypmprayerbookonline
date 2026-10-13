@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prayer Reader</title>
+  
+  <!-- Direct Google Font Links for EB Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -76,17 +79,20 @@
       if (!data) return;
 
       document.getElementById('prayerTitle').innerText = data.title;
-      document.getElementById('label1').innerText = l1.toUpperCase();
-      document.getElementById('contentPane1').innerText = data[l1] || data['en'];
 
       const dualContainer = document.getElementById('dualColumns');
+      const pane1 = document.getElementById('contentPane1');
       const pane2Container = document.getElementById('pane2Container');
+      const pane2 = document.getElementById('contentPane2');
+
+      document.getElementById('label1').innerText = l1.toUpperCase();
+      pane1.innerText = data[l1] || data['en'];
 
       if (l2 !== 'none' && l1 !== l2) {
         dualContainer.classList.add('split');
         pane2Container.style.display = 'block';
         document.getElementById('label2').innerText = l2.toUpperCase();
-        document.getElementById('contentPane2').innerText = data[l2] || data['en'];
+        pane2.innerText = data[l2] || data['la'] || data['en'];
       } else {
         dualContainer.classList.remove('split');
         pane2Container.style.display = 'none';
@@ -95,9 +101,11 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('lang1').value = localStorage.getItem('pref_pb1') || 'en';
-      document.getElementById('lang2').value = localStorage.getItem('pref_pb2') || 'none';
+      document.getElementById('lang2').value = localStorage.getItem('pref_pb2') || 'la';
+      
       const theme = localStorage.getItem('pref_theme') || 'light';
       document.body.setAttribute('data-theme', theme);
+      
       renderReader();
     });
   </script>
