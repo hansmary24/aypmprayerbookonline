@@ -8,8 +8,13 @@
 </head>
 <body>
 
+  <!-- Sticky Navbar with Large SVG Icons -->
   <header class="header">
-    <a href="index.html" class="nav-link">⌂</a>
+    <a href="index.html" class="nav-link" aria-label="Home">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    </a>
+
+    <!-- Dual Language Selector -->
     <div class="lang-controls">
       <select id="lang1" onchange="updateGlobalLang()">
         <option value="en">EN</option>
@@ -22,10 +27,17 @@
         <option value="en">EN</option>
       </select>
     </div>
+
+    <!-- Theme Toggle Button -->
+    <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+      <svg id="themeIcon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    </button>
   </header>
 
   <main class="app-container">
-    <div class="hero-circle">✠</div>
+    <div class="hero-circle">
+      <svg viewBox="0 0 24 24"><path d="M12 2L15 8L21 9L16.5 13.5L18 20L12 16.5L6 20L7.5 13.5L3 9L9 8L12 2Z"></path></svg>
+    </div>
     <h1>AYPM Prayer Book</h1>
     <p class="subtitle">Official Daily Prayers & Formularies • Blessed Ivan Merz Family</p>
     <div class="divider"></div>
@@ -36,6 +48,7 @@
       <a class="pill-btn" href="prayer.html?item=ivanMerzFamily">Bl. Ivan Merz Family Prayer</a>
       <a class="pill-btn" href="prayer.html?item=statesOfLife">States of Life Prayers</a>
       <a class="pill-btn" href="prayer.html?item=spiritualCommunion">Spiritual Communion</a>
+      <a class="pill-btn" href="prayer.html?item=deliveranceProtection">Deliverance & Protection</a>
     </div>
 
     <div class="cat-title">II. Evening Prayer</div>
@@ -57,9 +70,18 @@
       localStorage.setItem('pref_pb2', document.getElementById('lang2').value);
     }
 
+    function toggleTheme() {
+      const current = document.body.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', target);
+      localStorage.setItem('pref_theme', target);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('lang1').value = localStorage.getItem('pref_pb1') || 'en';
       document.getElementById('lang2').value = localStorage.getItem('pref_pb2') || 'none';
+      const theme = localStorage.getItem('pref_theme') || 'light';
+      document.body.setAttribute('data-theme', theme);
     });
   </script>
 </body>
