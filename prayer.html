@@ -13,21 +13,14 @@
 </head>
 <body>
 
-  <!-- Header with Font Size Slider -->
+  <!-- Clean Header -->
   <header class="header">
     <a href="index.html" class="nav-link" aria-label="Home">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
     </a>
 
     <div class="header-controls">
-      <!-- Font Size Adjustment Slider with - and + Buttons -->
-      <div class="font-size-control">
-        <button class="font-btn" onclick="adjustFont(-1)" aria-label="Decrease Font Size">A-</button>
-        <input type="range" id="fontSlider" class="font-size-slider" min="14" max="26" value="18" oninput="updateFontSize(this.value)">
-        <button class="font-btn" onclick="adjustFont(1)" aria-label="Increase Font Size">A+</button>
-      </div>
-
-      <!-- Language Selector -->
+      <!-- Language Controls -->
       <div class="lang-controls">
         <select id="lang1" onchange="renderReader()">
           <option value="en">EN</option>
@@ -39,6 +32,18 @@
           <option value="la">LA</option>
           <option value="en">EN</option>
         </select>
+      </div>
+
+      <!-- Aa Button for Font Popover -->
+      <button class="icon-btn" onclick="toggleFontPopover()" aria-label="Text Size">
+        Aa
+      </button>
+
+      <!-- Floating Font Size Popover Panel -->
+      <div id="fontPopover" class="font-popover">
+        <label for="fontSlider">A-</label>
+        <input type="range" id="fontSlider" min="14" max="28" value="18" oninput="updateFontSize(this.value)">
+        <label for="fontSlider">A+</label>
       </div>
 
       <!-- Dark Mode Toggle -->
@@ -69,17 +74,15 @@
 
   <script src="js/prayers-db.js"></script>
   <script>
+    function toggleFontPopover() {
+      const pop = document.getElementById('fontPopover');
+      pop.classList.toggle('active');
+    }
+
     function updateFontSize(val) {
       document.documentElement.style.setProperty('--reader-font-size', val + 'px');
       document.getElementById('fontSlider').value = val;
       localStorage.setItem('pref_font_size_px', val);
-    }
-
-    function adjustFont(delta) {
-      const slider = document.getElementById('fontSlider');
-      let currentVal = parseInt(slider.value, 10);
-      let newVal = Math.min(Math.max(currentVal + delta, 14), 26);
-      updateFontSize(newVal);
     }
 
     function toggleTheme() {
@@ -122,6 +125,14 @@
         pane2Container.style.display = 'none';
       }
     }
+
+    document.addEventListener('click', function(e) {
+      const pop = document.getElementById('fontPopover');
+      const btn = e.target.closest('button');
+      if (pop.classList.contains('active') && !e.target.closest('#fontPopover') && (!btn || !btn.getAttribute('onclick')?.includes('toggleFontPopover'))) {
+        pop.classList.remove('active');
+      }
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('lang1').value = localStorage.getItem('pref_pb1') || 'en';
