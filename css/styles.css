@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-
 :root {
   --primary-red: #8b0000;
   --bg-color: #faf9f6;
@@ -112,18 +110,18 @@ body {
 }
 
 .app-container {
-  max-width: 900px;
+  max-width: 1000px;
   width: 100%;
   margin: 0 auto;
-  padding: 24px 12px 60px;
+  padding: 20px 10px 60px;
   flex: 1;
 }
 
-/* Emblem Ring */
+/* Minimalist Cross Emblem */
 .hero-circle {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 20px;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 16px;
   border: 2px solid var(--primary-red);
   border-radius: 50%;
   display: flex;
@@ -135,8 +133,8 @@ body {
 }
 
 .hero-circle svg {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   fill: none;
   stroke: var(--primary-red);
   stroke-width: 2;
@@ -153,7 +151,7 @@ h1 {
 .subtitle {
   font-size: 15px;
   color: var(--text-sub);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   text-align: center;
   font-style: italic;
 }
@@ -162,7 +160,7 @@ h1 {
   width: 100%;
   height: 1px;
   background-color: var(--primary-red);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   opacity: 0.5;
 }
 
@@ -172,7 +170,7 @@ h1 {
   letter-spacing: 1.2px;
   color: var(--primary-red);
   text-transform: uppercase;
-  margin: 24px 0 12px;
+  margin: 20px 0 10px;
   text-align: center;
 }
 
@@ -210,64 +208,66 @@ h1 {
 }
 
 .prayer-title {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--primary-red);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-/* Side-by-Side Grid Layout */
+/* Forced Dual-Column Side-by-Side Grid */
 .dual-columns {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 10px;
+  width: 100%;
 }
 
 .dual-columns.split {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr !important;
 }
 
 .column-pane {
   background: var(--card-bg);
-  padding: 16px 14px;
-  border-radius: 10px;
+  padding: 14px 10px;
+  border-radius: 8px;
   border: 1px solid var(--border-color);
-  line-height: 1.65;
-  font-size: 16px;
+  line-height: 1.55;
+  font-size: 15px;
   white-space: pre-line;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .pane-label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--text-sub);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 4px;
 }
 
-/* Mobile-Specific Refinements for Side-by-Side Reading */
+/* Mobile Optimizations for Side-by-Side Reading */
 @media (max-width: 650px) {
   .app-container {
-    padding: 16px 8px 40px;
+    padding: 12px 6px 30px;
   }
 
   .column-pane {
-    padding: 12px 10px;
-    font-size: 14.5px;
-    line-height: 1.55;
+    padding: 10px 8px;
+    font-size: 13.5px;
+    line-height: 1.45;
   }
 
   .prayer-title {
-    font-size: 22px;
-    margin-bottom: 16px;
+    font-size: 20px;
+    margin-bottom: 12px;
   }
 
   .dual-columns.split {
-    gap: 8px;
+    gap: 6px !important;
   }
 }
