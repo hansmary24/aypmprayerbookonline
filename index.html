@@ -1,53 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AYPM Prayer Book</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-  <!-- Sticky Navbar with Large SVG Icons -->
+  <!-- Sticky Navbar -->
   <header class="header">
     <a href="index.html" class="nav-link" aria-label="Home">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
     </a>
 
-    <!-- Dual Language Selector -->
-    <div class="lang-controls">
-      <select id="lang1" onchange="updateGlobalLang()">
-        <option value="en">EN</option>
-        <option value="la">LA</option>
-      </select>
-      <span>|</span>
-      <select id="lang2" onchange="updateGlobalLang()">
-        <option value="none">None</option>
-        <option value="la">LA</option>
-        <option value="en">EN</option>
-      </select>
-    </div>
+    <div class="header-controls">
+      <!-- Dual Language Selector -->
+      <div class="lang-controls">
+        <select id="lang1" onchange="updateGlobalLang()">
+          <option value="en">EN</option>
+          <option value="la">LA</option>
+        </select>
+        <span>|</span>
+        <select id="lang2" onchange="updateGlobalLang()">
+          <option value="none">None</option>
+          <option value="la">LA</option>
+          <option value="en">EN</option>
+        </select>
+      </div>
 
-    <!-- Dark Mode Toggle Button -->
-    <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-    </button>
+      <!-- Dark Mode Toggle -->
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </button>
+    </div>
   </header>
 
   <main class="app-container">
+    <!-- Proportional Cross Icon inside Ring -->
     <div class="hero-circle">
       <svg viewBox="0 0 24 24">
         <path d="M12 2v20M7 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </div>
+    
     <h1>AYPM Prayer Book</h1>
     <p class="subtitle">Official Daily Prayers & Formularies • Blessed Ivan Merz Family</p>
     <div class="divider"></div>
 
-    <!-- I. Morning Prayer -->
+    <!-- Section I -->
     <div class="cat-title">I. Morning Prayer</div>
     <div class="pill-grid">
       <a class="pill-btn" href="prayer.html?item=morningOffering">1. Morning Offering</a>
@@ -60,7 +66,7 @@
       <a class="pill-btn" href="prayer.html?item=massIntention">7b. Mass Offering</a>
     </div>
 
-    <!-- II. Evening Prayer -->
+    <!-- Section II -->
     <div class="cat-title">II. Evening Prayer</div>
     <div class="pill-grid">
       <a class="pill-btn" href="prayer.html?item=eveningOffering">1. Evening Offering</a>
@@ -72,7 +78,7 @@
       <a class="pill-btn" href="prayer.html?item=cleansingPrayer">7a. Cleansing Prayer</a>
     </div>
 
-    <!-- III. Emergency Prayers -->
+    <!-- Section III -->
     <div class="cat-title">III. Emergency Prayers</div>
     <div class="pill-grid">
       <a class="pill-btn" href="prayer.html?item=actOfContrition">I. Act of Contrition</a>
@@ -96,7 +102,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('lang1').value = localStorage.getItem('pref_pb1') || 'en';
-      document.getElementById('lang2').value = localStorage.getItem('pref_pb2') || 'none';
+      document.getElementById('lang2').value = localStorage.getItem('pref_pb2') || 'la';
       const theme = localStorage.getItem('pref_theme') || 'light';
       document.body.setAttribute('data-theme', theme);
     });
