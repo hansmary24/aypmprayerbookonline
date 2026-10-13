@@ -4,18 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prayer Reader</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-  <!-- Single-Row Sticky Header -->
+  <!-- Header with Font Size Slider -->
   <header class="header">
     <a href="index.html" class="nav-link" aria-label="Home">
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
     </a>
 
     <div class="header-controls">
-      <!-- Language Dropdowns -->
+      <!-- Font Size Adjustment Slider with - and + Buttons -->
+      <div class="font-size-control">
+        <button class="font-btn" onclick="adjustFont(-1)" aria-label="Decrease Font Size">A-</button>
+        <input type="range" id="fontSlider" class="font-size-slider" min="14" max="26" value="18" oninput="updateFontSize(this.value)">
+        <button class="font-btn" onclick="adjustFont(1)" aria-label="Increase Font Size">A+</button>
+      </div>
+
+      <!-- Language Selector -->
       <div class="lang-controls">
         <select id="lang1" onchange="renderReader()">
           <option value="en">EN</option>
@@ -28,11 +40,6 @@
           <option value="en">EN</option>
         </select>
       </div>
-
-      <!-- Text Size Toggle -->
-      <button class="text-size-btn" onclick="cycleFontSize()" aria-label="Adjust Text Size">
-        Aa
-      </button>
 
       <!-- Dark Mode Toggle -->
       <button class="icon-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
@@ -62,16 +69,17 @@
 
   <script src="js/prayers-db.js"></script>
   <script>
-    const fontSizes = ['default', 'large', 'xlarge'];
+    function updateFontSize(val) {
+      document.documentElement.style.setProperty('--reader-font-size', val + 'px');
+      document.getElementById('fontSlider').value = val;
+      localStorage.setItem('pref_font_size_px', val);
+    }
 
-    function cycleFontSize() {
-      const current = document.body.getAttribute('data-font-size') || 'default';
-      const currentIndex = fontSizes.indexOf(current);
-      const nextIndex = (currentIndex + 1) % fontSizes.length;
-      const nextSize = fontSizes[nextIndex];
-      
-      document.body.setAttribute('data-font-size', nextSize);
-      localStorage.setItem('pref_font_size', nextSize);
+    function adjustFont(delta) {
+      const slider = document.getElementById('fontSlider');
+      let currentVal = parseInt(slider.value, 10);
+      let newVal = Math.min(Math.max(currentVal + delta, 14), 26);
+      updateFontSize(newVal);
     }
 
     function toggleTheme() {
@@ -122,8 +130,8 @@
       const theme = localStorage.getItem('pref_theme') || 'light';
       document.body.setAttribute('data-theme', theme);
 
-      const fontSize = localStorage.getItem('pref_font_size') || 'default';
-      document.body.setAttribute('data-font-size', fontSize);
+      const savedFontSize = localStorage.getItem('pref_font_size_px') || '18';
+      updateFontSize(savedFontSize);
       
       renderReader();
     });
