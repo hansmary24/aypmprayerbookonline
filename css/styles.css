@@ -34,7 +34,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Header Navbar */
+/* Minimalist Sticky Header */
 .header {
   position: sticky;
   top: 0;
@@ -51,7 +51,7 @@ body {
   margin: 0 auto;
 }
 
-/* Larger Minimalist SVG Icons */
+/* SVG Icon Action Buttons */
 .icon-btn, .nav-link {
   background: none;
   border: none;
@@ -60,7 +60,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 8px;
   border-radius: 50%;
   transition: background-color 0.2s ease;
   text-decoration: none;
@@ -71,8 +71,8 @@ body {
 }
 
 .icon-btn svg, .nav-link svg {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -86,7 +86,7 @@ body {
   gap: 8px;
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 6px 14px;
+  padding: 6px 16px;
   background: var(--card-bg);
   font-size: 14px;
   font-weight: 600;
@@ -110,7 +110,7 @@ body {
   flex: 1;
 }
 
-/* Emblem Hero Icon */
+/* Emblem Ring */
 .hero-circle {
   width: 130px;
   height: 130px;
