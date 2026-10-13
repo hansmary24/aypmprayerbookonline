@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
 :root {
   --primary-red: #8b0000;
   --bg-color: #faf9f6;
@@ -214,19 +216,17 @@ h1 {
   margin-bottom: 16px;
 }
 
-/* Forced Dual-Column Side-by-Side Grid */
+/* Forced Dual-Column Side-by-Side View (Mobile & Desktop) */
 .dual-columns {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+  width: 100% !important;
 }
 
-.dual-columns.split {
-  grid-template-columns: 1fr 1fr !important;
-}
-
-.column-pane {
+.dual-columns .column-pane {
+  flex: 1 1 50% !important;
+  min-width: 0 !important;
   background: var(--card-bg);
   padding: 14px 10px;
   border-radius: 8px;
@@ -234,9 +234,9 @@ h1 {
   line-height: 1.55;
   font-size: 15px;
   white-space: pre-line;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   word-break: break-word;
   overflow-wrap: anywhere;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 .pane-label {
@@ -250,24 +250,24 @@ h1 {
   padding-bottom: 4px;
 }
 
-/* Mobile Optimizations for Side-by-Side Reading */
+/* Mobile Optimizations */
 @media (max-width: 650px) {
   .app-container {
     padding: 12px 6px 30px;
   }
 
+  .dual-columns {
+    gap: 6px !important;
+  }
+
   .column-pane {
-    padding: 10px 8px;
-    font-size: 13.5px;
-    line-height: 1.45;
+    padding: 10px 8px !important;
+    font-size: 13.5px !important;
+    line-height: 1.45 !important;
   }
 
   .prayer-title {
     font-size: 20px;
     margin-bottom: 12px;
-  }
-
-  .dual-columns.split {
-    gap: 6px !important;
   }
 }
