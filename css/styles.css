@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
 :root {
   --primary-red: #8b0000;
   --bg-color: #faf9f6;
@@ -29,7 +31,7 @@
 }
 
 body {
-  font-family: "Sabon LT Pro", "Sabon Next", Sabon, Garamond, "Times New Roman", Georgia, serif;
+  font-family: 'EB Garamond', Garamond, 'Georgia', 'Times New Roman', serif;
   background-color: var(--bg-color);
   color: var(--text-main);
   min-height: 100vh;
@@ -93,7 +95,7 @@ body {
   border-radius: 20px;
   padding: 4px 12px;
   background: var(--card-bg);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   font-family: inherit;
 }
@@ -105,7 +107,7 @@ body {
   color: var(--primary-red);
   cursor: pointer;
   outline: none;
-  font-size: 13px;
+  font-size: 14px;
   font-family: inherit;
 }
 
@@ -141,7 +143,7 @@ body {
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: 0.5px;
   margin-bottom: 6px;
@@ -149,7 +151,7 @@ h1 {
 }
 
 .subtitle {
-  font-size: 13px;
+  font-size: 15px;
   color: var(--text-sub);
   margin-bottom: 24px;
   text-align: center;
@@ -165,7 +167,7 @@ h1 {
 }
 
 .cat-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.2px;
   color: var(--primary-red);
@@ -187,7 +189,7 @@ h1 {
   color: var(--primary-red);
   padding: 8px 14px;
   border-radius: 18px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -208,13 +210,13 @@ h1 {
 }
 
 .prayer-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--primary-red);
   margin-bottom: 20px;
 }
 
-/* Permanent Side-by-Side Grid Layout */
+/* Side-by-Side Grid Layout */
 .dual-columns {
   display: grid;
   grid-template-columns: 1fr;
@@ -231,14 +233,14 @@ h1 {
   border-radius: 10px;
   border: 1px solid var(--border-color);
   line-height: 1.65;
-  font-size: 14px;
+  font-size: 16px;
   white-space: pre-line;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   word-break: break-word;
 }
 
 .pane-label {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -256,12 +258,12 @@ h1 {
 
   .column-pane {
     padding: 12px 10px;
-    font-size: 13px;
+    font-size: 14.5px;
     line-height: 1.55;
   }
 
   .prayer-title {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 16px;
   }
 
