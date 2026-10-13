@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AYPM Virtual Daily Prayers</title>
+  <style>
+    :root {
+      --primary-color: #8b0000;
+      --accent-gold: #c59b27;
+      --bg-color: #faf9f6;
+      --card-bg: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-muted: #555555;
+      --border-radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+    }
+
+    .nav-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--text-dark);
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      gap: 8px;
+      background: #fff;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      padding: 20px 20px 40px;
+      margin: 0 auto;
+    }
+
+    /* Hero Emblem */
+    .hero-icon {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 20px;
+      border: 3px solid var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+      background-color: #fff;
+      box-shadow: 0 4px 12px rgba(139, 0, 0, 0.08);
+    }
+
+    .hero-icon svg {
+      width: 70px;
+      height: 70px;
+      fill: var(--primary-color);
+    }
+
+    .subtitle-top {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      color: var(--text-dark);
+    }
+
+    .description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      padding: 0 10px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      margin: 24px 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .section-title::before,
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #e0e0e0;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tag-button {
+      background: #ffffff;
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 8px 16px;
+      border-radius: var(--border-radius);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tag-button:hover {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .tag-button.emergency {
+      border-color: #a71d2a;
+      background-color: #fff5f5;
+      color: #a71d2a;
+      font-weight: 700;
+    }
+
+    .tag-button.emergency:hover {
+      background-color: #a71d2a;
+      color: #ffffff;
+    }
+
+    .tabs-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--primary-color);
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .divider-main {
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+      margin-bottom: 24px;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 28px 24px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-title {
+      font-size: 20px;
+      color: var(--primary-color);
+      margin-bottom: 16px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
+    }
+
+    .modal-body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #333;
+      white-space: pre-line;
+    }
+
+    .footer-symbol {
+      font-size: 22px;
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .footer-version {
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <button class="nav-icon" onclick="window.scrollTo({top:0, behavior:'smooth'})">⌂</button>
+    <div class="lang-toggle">
+      <span>EN</span>
+      <span>🌐</span>
+      <span>LA</span>
+    </div>
+    <div style="display: flex; gap: 16px;">
+      <button class="nav-icon">Aa</button>
+      <button class="nav-icon">🔖</button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    
+    <div class="hero-icon">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2L15 8L21 9L16.5 13.5L18 20L12 16.5L6 20L7.5 13.5L3 9L9 8L12 2Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 6V14M9 9H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="subtitle-top">Blessed Ivan Merz Family</div>
+    <h1>AYPM Virtual<br>Daily Prayers</h1>
+    <p class="description">
+      Official handbook and prayer guide for members of the<br>
+      Apostle of the Youth Prayer Movement.
+    </p>
+
+    <div class="tabs-nav">
+      <span>CONTENTS</span>
+      <span>✦</span>
+      <span>INDEX</span>
+    </div>
+    <div class="divider-main"></div>
+
+    <!-- Morning Prayer -->
+    <div class="section-title">I. Morning Prayer</div>
+    <div class="tags-container">
+      <button class="tag-button" onclick="openPrayer('morningOffering')">Morning Offering</button>
+      <button class="tag-button" onclick="openPrayer('ivanMerzFamily')">Blessed Ivan Merz Family Prayer</button>
+      <button class="tag-button" onclick="openPrayer('statesOfLife')">States of Life Prayers</button>
+      <button class="tag-button" onclick="openPrayer('spiritualCommunion')">Spiritual Communion</button>
+    </div>
+
+    <!-- Evening Prayer -->
+    <div class="section-title">II. Evening Prayer</div>
+    <div class="tags-container">
+      <button class="tag-button" onclick="openPrayer('eveningOffering')">Evening Offering</button>
+      <button class="tag-button" onclick="openPrayer('healingPrayer')">Healing Prayer (Bl. Ivan Merz)</button>
+      <button class="tag-button" onclick="openPrayer('examOfConscience')">Examination of Conscience</button>
+      <button class="tag-button" onclick="openPrayer('actOfConsecration')">Daily Act of Consecration</button>
+      <button class="tag-button" onclick="openPrayer('cleansingPrayer')">Cleansing Prayer</button>
+    </div>
+
+    <!-- Emergency Prayers -->
+    <div class="section-title">III. Emergency Prayers</div>
+    <div class="tags-container">
+      <button class="tag-button emergency" onclick="openPrayer('actOfContrition')">Act of Contrition</button>
+      <button class="tag-button emergency" onclick="openPrayer('prayerForProtection')">Prayer for Protection</button>
+      <button class="tag-button emergency" onclick="openPrayer('chapletDivineMercy')">Chaplet of Divine Mercy</button>
+      <button class="tag-button emergency" onclick="openPrayer('chapletIvanMerz')">Chaplet of Bl. Ivan Merz</button>
+    </div>
+
+    <div class="footer-symbol">✠</div>
+    <div class="footer-text">
+      Apostle of the Youth Prayer Movement<br>
+      Handbook and Golden Book
+    </div>
+    <div class="footer-version">
+      Version: 2026
+    </div>
+
+  </main>
+
+  <!-- Prayer Reader Modal Overlay -->
+  <div class="modal-overlay" id="prayerModal" onclick="closePrayerOnOutside(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closePrayer()">×</button>
+      <h2 class="modal-title" id="modalTitle">Prayer Title</h2>
+      <div class="modal-body" id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const prayers = {
+      morningOffering: {
+        title: "1. Morning Offering",
+        text: `O Jesus, through the Immaculate Heart of Mary, I offer you my prayers, works, joys, and sufferings of this day, for all the intentions of your Sacred Heart, in union with the Holy Sacrifice of the Mass throughout the world, for the salvation of souls, the reparation of sins, and the reunion of all Christians.\n\nIn a special way, I pray... FOR THE SOULS OF: (names in the AYPM Dashboard), FOR THE SPECIAL INTENTIONS OF: (names in the AYPM Dashboard), FOR THE DELIVERANCE, LIBERATION, AND HEALING OF: (names in the AYPM Dashboard) and in particular for the intentions of the Holy Father this month.\n\nAmen.`
+      },
+      ivanMerzFamily: {
+        title: "2. Daily Prayer of the Blessed Ivan Merz Family",
+        text: `Lord, hear my prayer and let my cry come unto you.\n\nI humbly bow before you, Almighty and Loving God, to implore your mercy, love, and protection for the Cause for the Canonization of Blessed Ivan Merz and its apostolates here in the Philippines, my spiritual family. May you always be our leader and guide in our efforts for your Holy Church and the expansion of your Kingdom. Lord Jesus Christ, in your mercy, dispel all curses, hexes, spells, evil tongues, evil intentions, rumors, and gossip that may hinder our mission to sanctify and save souls.\n\nHoly Spirit, ignite in my mind, heart, and soul the Divine Love to dedicate myself to this sacred work in the spirit of your servant, Blessed Ivan Merz. Inspire and motivate all pastors in the Church to welcome our work and receive us with love, sincerity, and kindness. Amen.\n\nMay the Lord bless us, protect us from all evil, and bring us to everlasting life. Amen.\n\n(Pray 1 Our Father, 1 Hail Mary, and 3 Glory Be)`
+      },
+      statesOfLife: {
+        title: "3. Prayers for Each State of Life",
+        text: `FOR SINGLE LAYPERSONS:\nGod the Father, Source of all love, I thank You for this season of singleness. Teach me to see it as Your gift: a time of preparation and purpose within Your will. Lord Jesus Christ, my true Friend and Redeemer, sanctify my heart and purify my desires. Turn my solitude into communion and my longing into prayer, that I may seek You above all. Holy Spirit, Consoler and Guide, fill my days with Your light. Strengthen me to serve with joy and follow the path You have prepared for me. Amen.\n\nFOR LAYPERSONS IN A RELATIONSHIP:\nGod the Father, Creator of love and unity, I thank You for this relationship. Teach us to honor You by seeking Your will above our own. Lord Jesus Christ, our Companion and Savior, shape our hearts after Yours. Let our affection be pure, our patience steadfast, and our love a reflection of Your truth. Holy Spirit, love of the Father and the Son, dwell within us. Guard our hearts, watch over our actions, purify our bond, and make our relationship a witness of holiness to the world. Amen.`
+      },
+      spiritualCommunion: {
+        title: "Spiritual Communion",
+        text: `My Jesus, I believe that You are present in the Most Holy Sacrament. I love You above all things, and I desire to receive You into my soul. Since I cannot at this moment receive You sacramentally, come at least spiritually into my heart. I embrace You as if You were already there and unite myself wholly to You. Never permit me to be separated from You. Amen.`
+      },
+      eveningOffering: {
+        title: "1. Evening Offering",
+        text: `Lord Jesus, my Light and my Rest, as this day draws to a close, I kneel before You in silence and surrender. I thank You for every grace, every trial, every moment You allowed me to walk with You today. If I have served You faithfully, I give You all the glory. If I have failed You, I ask for Your mercy. Cleanse me and teach me to begin again.\n\nIn the spirit of Blessed Ivan Merz, I examine my heart with truth: Where did I seek myself instead of You? Where did I choose comfort over sacrifice, pleasure over purity, pride over humility? "How far I am from perfection," Ivan once wrote. And yet, like him, I believe that You can take even the mud of my soul and form it into something beautiful. Tonight, I offer You: my sins, that You may forgive them; my wounds, that You may heal them; my joys, that You may sanctify them; my dreams, that You may guide them. Grant me restful sleep and holy silence. Speak to my heart, even as I rest. May I rise tomorrow with greater desire to live for You, to seek You in every word, task, and soul.\n\nI entrust myself to You through the Heart of Mary, my Mother and Queen. May she keep me under her mantle, as I sleep in Your grace.\n\nJesus, I am Yours. Receive my day. Renew my heart. Prepare me for Heaven. Amen.`
+      },
+      healingPrayer: {
+        title: "2. Healing Prayer Through Bl. Ivan Merz",
+        text: `O Most Holy Trinity: Father, Son, and Holy Spirit, I beg you to have mercy on me, and graciously hear my prayer for healing. I am present here in this chapel consecrated to your honor, for your greater glory, and the veneration of your Holy Servants, especially our powerful and compassionate intercessor, Blessed Ivan Merz.\n\nLoving and Merciful God, you are my Father, and I am your child. I come before you as your creation to humbly ask your mercy for the body you have created. Forgive me if I have not taken care of my body well. Sickness came due to my weaknesses and sins. I thank you for sending your Son, Jesus Christ, to be our divine physician. Through his passion, death, and resurrection, I call upon his mighty Name to be my healer at this very moment...\n\nAmen.`
+      },
+      examOfConscience: {
+        title: "3. Examination of Conscience (Bl. Ivan Merz)",
+        text: `Begin with: "Jesus, let Your will be done! Speak, Lord, for Your servant listens."\n\n• On Love of God: "No light during meditation. I sinned exceedingly in thought, word, and deed." Lord, where have I lost the inner light? Have I confessed my sins with humility & sorrow?\n• On Selflessness & Sacrifice: Have I been faithful in chastity, modesty, and simplicity of heart? Have I fled occasions of sin and sought to resemble Christ in purity?\n• On Love of Truth & Sincerity: Do I rule my senses, or do they rule me? Have I sought comfort over holiness?\n\nEnd with: "Jesus, let Your will be done! Lord, let me never betray You. Let Your will be my only law, Your love my only goal, Your purity my crown. In You, I find everything. In You, I wish to die."`
+      },
+      actOfConsecration: {
+        title: "6. Daily Act of Consecration",
+        text: `Most Sacred Heart of the Lord Jesus and Immaculate Heart of the Blessed Virgin Mary, I solemnly consecrate myself and my entire family to Your loving care. I offer to You my very being and all the days of my life; all that I am, all that I have, and all that I love. To You, I give my body, my heart, and my soul. I likewise dedicate to You my home and my country.\n\nMindful of this solemn consecration, I earnestly pledge with the help of Your mercy and grace to live in accordance with the Christian way, striving to practice the virtues of Christ, without regard for human respect or praise. O Most Sacred Heart of the Lord Jesus and Immaculate Heart of the Blessed Virgin Mary, I beseech You to accept my humble confidence and this Act of Consecration, by which I entrust myself and my family entirely to Your merciful protection.\n\nIn You alone do I place all my hope; in Your grace, may I never be put to shame. Most Sacred Heart of the Lord Jesus, have mercy on me. Immaculate Heart of the Blessed Virgin Mary, be my salvation and refuge. Amen.`
+      },
+      cleansingPrayer: {
+        title: "7. Cleansing Prayer",
+        text: `Heavenly Father, in the Name of the Lord Jesus Christ, our Savior and Redeemer, and by the power of the Holy Spirit, we beseech You to send forth the cleansing power of the Most Precious Blood of Your Son upon us this very moment. Purify and wash us thoroughly with that Most Precious Blood, from the crown of our heads to the very soles of our feet.\n\nMay this Blood penetrate to the very marrow of our bones, cleansing us from every entanglement or influence of any evil spirit with whom we may have come into contact during our intercession or during the course of the day. Anoint us with the gifts of the Holy Spirit; renew and refresh our body, soul, and spirit. By the power of Your holy cross, may all evil spirits be driven away from us, in the Name of the Father and of the Son + and of the Holy Spirit. Amen.`
+      },
+      actOfContrition: {
+        title: "Emergency: Act of Contrition",
+        text: `My God, I am sorry for my sins with all my heart. In choosing to do wrong and failing to do good, I have sinned against you whom I should love above all things. I firmly intend, with your help, to do penance, to sin no more, and to avoid whatever leads me to sin. Our Savior Jesus Christ suffered and died for the Blessed Ivan Merz Family. In his name, my God, have mercy. Amen.`
+      },
+      prayerForProtection: {
+        title: "Emergency: Prayer for Protection",
+        text: `Lord Jesus, I ask Thee to protect me, my family, and the Blessed Ivan Merz Family, from sickness, from all harm and from accidents. If any of us has been subjected to any curses, hexes or spells, I beg Thee to declare these curses, hexes or spells null and void. If any evil spirits have been sent against us, I ask Christ to decommission you and I ask that you be sent to the foot of His Cross to deal with as He will. Then, Lord, I ask Thee to send Thy holy Angels to guard and protect all of us. Amen.`
+      },
+      chapletDivineMercy: {
+        title: "Emergency: Chaplet of Divine Mercy",
+        text: `Eternal Father, I offer You the Body and Blood, Soul and Divinity of Your Dearly Beloved Son, Our Lord, Jesus Christ, in atonement for our sins and those of the whole world.\n\nOn the 10 Small Beads:\nFor the sake of His sorrowful Passion, have mercy on the Blessed Ivan Merz Family and on the whole world.\n\nConcluding Prayer (3x):\nHoly God, Holy Mighty One, Holy Immortal One, have mercy on the Blessed Ivan Merz Family and on the whole world.`
+      },
+      chapletIvanMerz: {
+        title: "Emergency: Chaplet of Blessed Ivan Merz",
+        text: `1. Sign of the Cross\n2. Our Father, Hail Mary, Apostles' Creed\n3. Repeat 32 times:\n   • Glory Be\n   • Blessed Ivan Merz, pray for the Blessed Ivan Merz Family.\n\nConcluding Prayer:\nLoving and Merciful God, you chose your servant Blessed Ivan Merz to be one of our intercessors in heaven. His life of total dedication to you through chastity, service to the Church, education, and formation of the youth is truly inspiring. Through Blessed Ivan's intercession, grant us his canonization and protection for our spiritual family. Amen.`
+      }
+    };
+
+    function openPrayer(id) {
+      const data = prayers[id];
+      if (data) {
+        document.getElementById('modalTitle').innerText = data.title;
+        document.getElementById('modalContent').innerText = data.text;
+        document.getElementById('prayerModal').style.display = 'flex';
+      }
+    }
+
+    function closePrayer() {
+      document.getElementById('prayerModal').style.display = 'none';
+    }
+
+    function closePrayerOnOutside(e) {
+      if (e.target.id === 'prayerModal') {
+        closePrayer();
+      }
+    }
+  </script>
+
+</body>
+</html>
