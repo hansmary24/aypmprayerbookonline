@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
 :root {
   --primary-red: #8b0000;
   --bg-color: #faf9f6;
@@ -9,8 +11,8 @@
   --pill-hover-bg: #8b0000;
   --pill-hover-text: #ffffff;
 
-  /* Font Size Control Variables */
-  --reader-font-size: 16px;
+  /* Default Reader Text Size (Increased) */
+  --reader-font-size: 18px;
   --reader-line-height: 1.6;
 }
 
@@ -26,17 +28,6 @@
   --pill-hover-text: #121212;
 }
 
-/* Font Size Tiers */
-[data-font-size="large"] {
-  --reader-font-size: 18px;
-  --reader-line-height: 1.65;
-}
-
-[data-font-size="xlarge"] {
-  --reader-font-size: 20px;
-  --reader-line-height: 1.7;
-}
-
 * { 
   box-sizing: border-box; 
   margin: 0; 
@@ -44,7 +35,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'EB Garamond', Garamond, 'Georgia', 'Times New Roman', serif;
   background-color: var(--bg-color);
   color: var(--text-main);
   min-height: 100vh;
@@ -54,7 +45,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Sticky Header - Single Line Alignment */
+/* Header Single-Row Layout */
 .header {
   position: sticky;
   top: 0;
@@ -75,10 +66,10 @@ body {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-/* Minimalist Header Action Buttons */
+/* Navigation Icons */
 .icon-btn, .nav-link {
   background: none;
   border: none;
@@ -108,14 +99,14 @@ body {
   stroke-linejoin: round;
 }
 
-/* Language Switcher Pill */
+/* Language Pill Switcher */
 .lang-controls {
   display: flex;
   align-items: center;
   gap: 4px;
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 4px 10px;
+  padding: 3px 8px;
   background: var(--card-bg);
   font-size: 13px;
   font-weight: 600;
@@ -133,55 +124,150 @@ body {
   font-family: inherit;
 }
 
-/* Minimalist Text-Size Pill Button */
-.text-size-btn {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
+/* Font Size Control Pill Bar */
+.font-size-control {
   display: flex;
   align-items: center;
-  gap: 2px;
-  transition: background-color 0.2s ease;
+  gap: 4px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 3px 8px;
+  background: var(--card-bg);
+}
+
+.font-btn {
+  background: none;
+  border: none;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
   font-family: inherit;
 }
 
-.text-size-btn:hover {
-  background-color: var(--border-color);
+.font-btn:hover {
+  color: var(--primary-red);
+}
+
+.font-size-slider {
+  width: 45px;
+  height: 4px;
+  accent-color: var(--primary-red);
+  cursor: pointer;
 }
 
 .app-container {
   max-width: 1000px;
   width: 100%;
   margin: 0 auto;
-  padding: 16px 8px 60px;
+  padding: 20px 12px 60px;
   flex: 1;
+}
+
+/* Proportional Cross Emblem */
+.hero-circle {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 12px;
+  border: 2px solid var(--primary-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-red);
+  background: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.hero-circle svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: var(--primary-red);
+  stroke-width: 2;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  text-align: center;
+  font-style: italic;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--primary-red);
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.cat-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: var(--primary-red);
+  text-transform: uppercase;
+  margin: 24px 0 12px;
+  text-align: center;
+}
+
+.pill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pill-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--primary-red);
+  color: var(--primary-red);
+  padding: 8px 16px;
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+  font-family: inherit;
+}
+
+.pill-btn:hover {
+  background: var(--pill-hover-bg);
+  color: var(--pill-hover-text);
 }
 
 .reader-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .prayer-title {
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 26px;
+  font-weight: 700;
   color: var(--primary-red);
-  margin-bottom: 14px;
-  letter-spacing: -0.3px;
+  margin-bottom: 16px;
 }
 
-/* Enforced Side-by-Side Dual-Column Layout */
+/* Permanent Side-by-Side View for Mobile & Desktop */
 .dual-columns {
   display: flex !important;
   flex-direction: row !important;
-  gap: 8px !important;
+  gap: 10px !important;
   width: 100% !important;
 }
 
@@ -189,7 +275,7 @@ body {
   flex: 1 1 50% !important;
   min-width: 0 !important;
   background: var(--card-bg);
-  padding: 14px 10px;
+  padding: 16px 12px;
   border-radius: 10px;
   border: 1px solid var(--border-color);
   line-height: var(--reader-line-height);
@@ -198,38 +284,27 @@ body {
   word-break: break-word;
   overflow-wrap: anywhere;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-  transition: font-size 0.2s ease;
 }
 
 .pane-label {
-  font-size: 11px;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   color: var(--text-sub);
   margin-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 4px;
 }
 
-/* Pill Buttons for Navigation */
-.pill-btn {
-  background: var(--card-bg);
-  border: 1px solid var(--primary-red);
-  color: var(--primary-red);
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-block;
-  font-family: inherit;
-}
-
 /* Mobile Tweak */
 @media (max-width: 650px) {
+  :root {
+    --reader-font-size: 16px;
+  }
+
   .app-container {
-    padding: 12px 4px 30px;
+    padding: 12px 6px 30px;
   }
 
   .dual-columns {
@@ -241,7 +316,7 @@ body {
   }
 
   .prayer-title {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 12px;
   }
 }
