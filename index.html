@@ -3,490 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AYPM Pocket Prayer Book</title>
-  <style>
-    :root {
-      --primary-red: #8b0000;
-      --bg-cream: #faf9f6;
-      --card-bg: #ffffff;
-      --text-main: #111111;
-      --text-sub: #555555;
-      --border-color: #e0e0e0;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-cream);
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* Navbar Header */
-    .header {
-      position: sticky;
-      top: 0;
-      background: rgba(250, 249, 246, 0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border-color);
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 24px;
-      max-width: 1000px;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    .icon-btn {
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      color: var(--text-main);
-      padding: 4px 8px;
-    }
-
-    /* Configurable Dual-Language Selector Switcher */
-    .lang-controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      padding: 4px 12px;
-      background: #fff;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .lang-controls select {
-      border: none;
-      background: transparent;
-      font-weight: 700;
-      color: var(--primary-red);
-      cursor: pointer;
-      outline: none;
-    }
-
-    .app-viewport {
-      max-width: 900px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 24px 20px 60px;
-      flex: 1;
-    }
-
-    /* Main Hub/Home view */
-    .home-view {
-      text-align: center;
-    }
-
-    .hero-circle {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 20px;
-      border: 3px solid var(--primary-red);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      color: var(--primary-red);
-      background: #fff;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-sub);
-      margin-bottom: 24px;
-    }
-
-    .nav-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      font-weight: 800;
-      color: var(--primary-red);
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .nav-tabs span { cursor: pointer; }
-    .nav-tabs span.active { text-decoration: underline; }
-
-    .divider {
-      width: 100%;
-      height: 2px;
-      background-color: var(--primary-red);
-      margin-bottom: 24px;
-    }
-
-    .category-section {
-      margin-bottom: 24px;
-    }
-
-    .cat-title {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      color: var(--primary-red);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .pill-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .pill-btn {
-      background: #fff;
-      border: 1px solid var(--primary-red);
-      color: var(--primary-red);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .pill-btn:hover {
-      background: var(--primary-red);
-      color: #fff;
-    }
-
-    /* Dedicated Reader View with Configurable Dual Side-by-Side View */
-    .reader-view {
-      display: none;
-    }
-
-    .reader-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 12px;
-    }
-
-    .back-btn {
-      background: none;
-      border: none;
-      color: var(--primary-red);
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .prayer-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--primary-red);
-    }
-
-    /* Dynamic Dual-Column Split */
-    .dual-columns {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      margin-top: 20px;
-    }
-
-    .dual-columns.split {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .column-pane {
-      background: #fff;
-      padding: 24px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      line-height: 1.8;
-      font-size: 15px;
-      white-space: pre-line;
-    }
-
-    .pane-label {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-sub);
-      margin-bottom: 12px;
-      border-bottom: 1px solid #f0f0f0;
-      padding-bottom: 4px;
-    }
-
-    @media (max-width: 600px) {
-      .dual-columns.split {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <title>AYPM Prayer Book</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 
-  <!-- Top Navigation Controls -->
   <header class="header">
-    <button class="icon-btn" onclick="navigateToHome()">⌂</button>
-    
-    <!-- Configurable Side-by-Side Language Controls -->
+    <a href="index.html" class="nav-link">⌂</a>
     <div class="lang-controls">
-      <select id="lang1" onchange="updateLangState()">
-        <option value="en">EN (English)</option>
-        <option value="la">LA (Latin)</option>
+      <select id="lang1" onchange="updateGlobalLang()">
+        <option value="en">EN</option>
+        <option value="la">LA</option>
       </select>
       <span>|</span>
-      <select id="lang2" onchange="updateLangState()">
-        <option value="none">None (Single)</option>
-        <option value="la">LA (Latin)</option>
-        <option value="en">EN (English)</option>
+      <select id="lang2" onchange="updateGlobalLang()">
+        <option value="none">None</option>
+        <option value="la">LA</option>
+        <option value="en">EN</option>
       </select>
-    </div>
-
-    <div>
-      <button class="icon-btn" onclick="showBookmarks()">🔖</button>
     </div>
   </header>
 
-  <main class="app-viewport">
-    
-    <!-- HUB / MAIN INDEX VIEW -->
-    <section id="homeView" class="home-view">
-      <div class="hero-circle">✠</div>
-      <h1>AYPM Prayer Book</h1>
-      <p class="subtitle">Official Daily Prayers & Formularies • Blessed Ivan Merz Family</p>
+  <main class="app-container">
+    <div class="hero-circle">✠</div>
+    <h1>AYPM Prayer Book</h1>
+    <p class="subtitle">Official Daily Prayers & Formularies • Blessed Ivan Merz Family</p>
+    <div class="divider"></div>
 
-      <div class="nav-tabs">
-        <span class="active">CONTENTS</span>
-        <span>✦</span>
-        <span onclick="showBookmarks()">BOOKMARKS</span>
-      </div>
-      <div class="divider"></div>
+    <div class="cat-title">I. Morning Prayer</div>
+    <div class="pill-grid">
+      <a class="pill-btn" href="prayer.html?item=morningOffering">Morning Offering</a>
+      <a class="pill-btn" href="prayer.html?item=ivanMerzFamily">Bl. Ivan Merz Family Prayer</a>
+      <a class="pill-btn" href="prayer.html?item=statesOfLife">States of Life Prayers</a>
+      <a class="pill-btn" href="prayer.html?item=spiritualCommunion">Spiritual Communion</a>
+    </div>
 
-      <div class="category-section">
-        <div class="cat-title">I. Morning Prayer</div>
-        <div class="pill-grid">
-          <button class="pill-btn" onclick="openPrayer('morningOffering')">Morning Offering</button>
-          <button class="pill-btn" onclick="openPrayer('ivanMerzFamily')">Bl. Ivan Merz Family Prayer</button>
-        </div>
-      </div>
+    <div class="cat-title">II. Evening Prayer</div>
+    <div class="pill-grid">
+      <a class="pill-btn" href="prayer.html?item=eveningOffering">Evening Offering</a>
+      <a class="pill-btn" href="prayer.html?item=opLitany">Litany of Order of Preachers</a>
+    </div>
 
-      <div class="category-section">
-        <div class="cat-title">II. Evening & Intercessory Prayers</div>
-        <div class="pill-grid">
-          <button class="pill-btn" onclick="openPrayer('eveningOffering')">Evening Offering</button>
-          <button class="pill-btn" onclick="openPrayer('opLitany')">Litany of the Order of Preachers</button>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="cat-title">III. Emergency Prayers</div>
-        <div class="pill-grid">
-          <button class="pill-btn" onclick="openPrayer('actOfContrition')">Act of Contrition</button>
-          <button class="pill-btn" onclick="openPrayer('chapletDivineMercy')">Chaplet of Divine Mercy</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- DEDICATED PRAYER READER VIEW -->
-    <section id="readerView" class="reader-view">
-      <div class="reader-header">
-        <button class="back-btn" onclick="navigateToHome()">← Back to Index</button>
-        <button class="icon-btn" id="bookmarkBtn" onclick="toggleBookmark()">🔖</button>
-      </div>
-
-      <h2 id="prayerTitle" class="prayer-title">Prayer Title</h2>
-
-      <!-- Dynamic Side-by-Side Dual-Pane Layout -->
-      <div id="dualColumns" class="dual-columns">
-        <div class="column-pane">
-          <div class="pane-label" id="label1">ENGLISH</div>
-          <div id="contentPane1"></div>
-        </div>
-        <div class="column-pane" id="pane2Container" style="display:none;">
-          <div class="pane-label" id="label2">LATIN</div>
-          <div id="contentPane2"></div>
-        </div>
-      </div>
-    </section>
-
+    <div class="cat-title">III. Emergency Prayers</div>
+    <div class="pill-grid">
+      <a class="pill-btn" href="prayer.html?item=actOfContrition">Act of Contrition</a>
+      <a class="pill-btn" href="prayer.html?item=chapletIvanMerz">Chaplet of Bl. Ivan Merz</a>
+    </div>
   </main>
 
   <script>
-    // Prayer Database supporting multi-lingual side-by-side translation
-    const prayerDB = {
-      morningOffering: {
-        title: "Morning Offering",
-        en: `O Jesus, through the Immaculate Heart of Mary, I offer you my prayers, works, joys, and sufferings of this day, for all the intentions of your Sacred Heart, in union with the Holy Sacrifice of the Mass throughout the world, for the salvation of souls, the reparation of sins, and the reunion of all Christians.\n\nAmen.`,
-        la: `O Iesu, per Immaculatum Cor Mariae, tibi offero orationes, opera, gaudia et passiones huius diei, pro omnibus intentionibus Sacratissimi Cordis tui, in unione cum Sacrificio Missae ubique terrarum.\n\nAmen.`
-      },
-      ivanMerzFamily: {
-        title: "Daily Prayer of the Blessed Ivan Merz Family",
-        en: `Lord, hear my prayer and let my cry come unto you. I humbly bow before you, Almighty and Loving God, to implore your mercy, love, and protection for the Cause for the Canonization of Blessed Ivan Merz and its apostolates.\n\nAmen.`,
-        la: `Domine, exaudi orationem meam, et clamor meus ad te veniat. Supplex te rogo, Omnipotens Deus, pro Causa Canonizationis Beati Joannis Merz.\n\nAmen.`
-      },
-      eveningOffering: {
-        title: "Evening Offering",
-        en: `Lord Jesus, my Light and my Rest, as this day draws to a close, I kneel before You in silence and surrender. I thank You for every grace, every trial, every moment You allowed me to walk with You today.\n\nAmen.`,
-        la: `Domine Iesu, lux mea et requies mea, inclinante iam die, coram te in silentio flecto. Gratias tibi ago pro omnibus gratiis huius diei.\n\nAmen.`
-      },
-      opLitany: {
-        title: "Litany of the Order of Preachers",
-        en: `Kyrie, eleison. Kyrie, eleison.\nChriste, eleison. Christe, eleison.\nKyrie, eleison. Kyrie, eleison.\n\nHoly Mary, Virgin Mother of God * pray for us.\nHoly Mary, Queen of Heaven * pray for us.\nHoly Mary, Star of the Sea * pray for us.`,
-        la: `Kýrie, eléison. Kýrie, eléison.\nChriste, eléison. Christe, eléison.\nKýrie, eléison. Kýrie, eléison.\n\nSancta María Mater Dei * ora pro nobis.\nSancta María Cœlórum Regina * ora pro nobis.\nSancta María stella maris * ora pro nobis.`
-      },
-      actOfContrition: {
-        title: "Act of Contrition",
-        en: `My God, I am sorry for my sins with all my heart. In choosing to do wrong and failing to do good, I have sinned against you whom I should love above all things.\n\nAmen.`,
-        la: `Deus meus, ex toto corde me poenitet omnium meorum peccatorum, eaque detestor, quia peccando iustas tuas poenas merui.\n\nAmen.`
-      },
-      chapletDivineMercy: {
-        title: "Chaplet of Divine Mercy",
-        en: `Eternal Father, I offer You the Body and Blood, Soul and Divinity of Your Dearly Beloved Son, Our Lord, Jesus Christ, in atonement for our sins and those of the whole world.`,
-        la: `Pater Aeterne, offero Tibi Corpus et Sanguinem, Animam et Divinitatem Dilectissimi Filii Tui, Domini Nostri Iesu Christi, in propitiationem pro peccatis nostris et totius mundi.`
-      }
-    };
-
-    let currentPrayerKey = null;
-
-    // SPA Navigation & URL state handler (syncs URL params like opusdei.org)
-    function syncStateFromURL() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const pb1 = urlParams.get('pb1') || 'en';
-      const pb2 = urlParams.get('pb2') || 'none';
-      const item = urlParams.get('item');
-
-      document.getElementById('lang1').value = pb1;
-      document.getElementById('lang2').value = pb2;
-
-      if (item && prayerDB[item]) {
-        renderReaderView(item, pb1, pb2);
-      } else {
-        renderHomeView();
-      }
+    function updateGlobalLang() {
+      localStorage.setItem('pref_pb1', document.getElementById('lang1').value);
+      localStorage.setItem('pref_pb2', document.getElementById('lang2').value);
     }
 
-    function updateLangState() {
-      const pb1 = document.getElementById('lang1').value;
-      const pb2 = document.getElementById('lang2').value;
-      
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.set('pb1', pb1);
-      urlParams.set('pb2', pb2);
-
-      history.pushState(null, '', '?' + urlParams.toString());
-      syncStateFromURL();
-    }
-
-    function openPrayer(key) {
-      const urlParams = new URLSearchParams(window.location.search);
-      urlParams.set('item', key);
-      if (!urlParams.get('pb1')) urlParams.set('pb1', 'en');
-      if (!urlParams.get('pb2')) urlParams.set('pb2', 'none');
-
-      history.pushState(null, '', '?' + urlParams.toString());
-      syncStateFromURL();
-    }
-
-    function navigateToHome() {
-      const pb1 = document.getElementById('lang1').value;
-      const pb2 = document.getElementById('lang2').value;
-      history.pushState(null, '', `?pb1=${pb1}&pb2=${pb2}`);
-      syncStateFromURL();
-    }
-
-    function renderHomeView() {
-      document.getElementById('homeView').style.display = 'block';
-      document.getElementById('readerView').style.display = 'none';
-    }
-
-    function renderReaderView(key, l1, l2) {
-      currentPrayerKey = key;
-      const data = prayerDB[key];
-
-      document.getElementById('homeView').style.display = 'none';
-      document.getElementById('readerView').style.display = 'block';
-      document.getElementById('prayerTitle').innerText = data.title;
-
-      const dualContainer = document.getElementById('dualColumns');
-      const pane2Container = document.getElementById('pane2Container');
-
-      // Primary Pane
-      document.getElementById('label1').innerText = l1.toUpperCase();
-      document.getElementById('contentPane1').innerText = data[l1] || data['en'];
-
-      // Secondary Parallel Pane (Side-by-Side configured)
-      if (l2 !== 'none' && l1 !== l2) {
-        dualContainer.classList.add('split');
-        pane2Container.style.display = 'block';
-        document.getElementById('label2').innerText = l2.toUpperCase();
-        document.getElementById('contentPane2').innerText = data[l2] || data['en'];
-      } else {
-        dualContainer.classList.remove('split');
-        pane2Container.style.display = 'none';
-      }
-
-      updateBookmarkButtonState();
-    }
-
-    /* Bookmarking Logic */
-    function getBookmarks() {
-      return JSON.parse(localStorage.getItem('aypm_bookmarks') || '[]');
-    }
-
-    function toggleBookmark() {
-      if (!currentPrayerKey) return;
-      let bookmarks = getBookmarks();
-      if (bookmarks.includes(currentPrayerKey)) {
-        bookmarks = bookmarks.filter(k => k !== currentPrayerKey);
-      } else {
-        bookmarks.push(currentPrayerKey);
-      }
-      localStorage.setItem('aypm_bookmarks', JSON.stringify(bookmarks));
-      updateBookmarkButtonState();
-    }
-
-    function updateBookmarkButtonState() {
-      const bookmarks = getBookmarks();
-      const btn = document.getElementById('bookmarkBtn');
-      if (bookmarks.includes(currentPrayerKey)) {
-        btn.style.color = '#8b0000';
-      } else {
-        btn.style.color = '#111111';
-      }
-    }
-
-    function showBookmarks() {
-      const bookmarks = getBookmarks();
-      if (bookmarks.length === 0) {
-        alert('No saved bookmarks yet.');
-        return;
-      }
-      openPrayer(bookmarks[0]);
-    }
-
-    // Handle browser back/forward buttons
-    window.addEventListener('popstate', syncStateFromURL);
-
-    // Initial Load
-    window.addEventListener('DOMContentLoaded', syncStateFromURL);
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('lang1').value = localStorage.getItem('pref_pb1') || 'en';
+      document.getElementById('lang2').value = localStorage.getItem('pref_pb2') || 'none';
+    });
   </script>
 </body>
 </html>
