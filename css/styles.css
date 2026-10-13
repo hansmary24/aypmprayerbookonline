@@ -9,8 +9,8 @@
   --pill-hover-bg: #8b0000;
   --pill-hover-text: #ffffff;
 
-  /* Font Size Control Variables (Higher Default Base) */
-  --reader-font-size: 17px;
+  /* Font Size Control Variables */
+  --reader-font-size: 16px;
   --reader-line-height: 1.6;
 }
 
@@ -28,12 +28,12 @@
 
 /* Font Size Tiers */
 [data-font-size="large"] {
-  --reader-font-size: 19px;
+  --reader-font-size: 18px;
   --reader-line-height: 1.65;
 }
 
 [data-font-size="xlarge"] {
-  --reader-font-size: 22px;
+  --reader-font-size: 20px;
   --reader-line-height: 1.7;
 }
 
@@ -44,7 +44,7 @@
 }
 
 body {
-  font-family: "Sabon Next LT Pro", "Sabon Next Pro", "Sabon Next", "Sabon LT Pro", Sabon, Garamond, "Georgia", serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-main);
   min-height: 100vh;
@@ -54,7 +54,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Sticky Header */
+/* Sticky Header - Single Line Alignment */
 .header {
   position: sticky;
   top: 0;
@@ -63,21 +63,22 @@ body {
   border-bottom: 1px solid var(--border-color);
   z-index: 100;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 14px;
+  padding: 10px 12px;
   max-width: 1000px;
   width: 100%;
   margin: 0 auto;
 }
 
-.header-actions {
+.header-controls {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* Header Buttons */
+/* Minimalist Header Action Buttons */
 .icon-btn, .nav-link {
   background: none;
   border: none;
@@ -86,13 +87,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 10px;
-  border-radius: 20px;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
   text-decoration: none;
   font-family: inherit;
-  font-weight: 700;
-  font-size: 15px;
 }
 
 .icon-btn:hover, .nav-link:hover {
@@ -100,8 +99,8 @@ body {
 }
 
 .icon-btn svg, .nav-link svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -109,15 +108,16 @@ body {
   stroke-linejoin: round;
 }
 
+/* Language Switcher Pill */
 .lang-controls {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   border: 1px solid var(--border-color);
   border-radius: 20px;
-  padding: 4px 12px;
+  padding: 4px 10px;
   background: var(--card-bg);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   font-family: inherit;
 }
@@ -129,120 +129,59 @@ body {
   color: var(--primary-red);
   cursor: pointer;
   outline: none;
-  font-size: 14px;
+  font-size: 13px;
   font-family: inherit;
+}
+
+/* Minimalist Text-Size Pill Button */
+.text-size-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: background-color 0.2s ease;
+  font-family: inherit;
+}
+
+.text-size-btn:hover {
+  background-color: var(--border-color);
 }
 
 .app-container {
   max-width: 1000px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 10px 60px;
+  padding: 16px 8px 60px;
   flex: 1;
-}
-
-/* Minimalist Cross Emblem */
-.hero-circle {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 16px;
-  border: 2px solid var(--primary-red);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-red);
-  background: var(--card-bg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.hero-circle svg {
-  width: 40px;
-  height: 40px;
-  fill: none;
-  stroke: var(--primary-red);
-  stroke-width: 2;
-}
-
-h1 {
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-  text-align: center;
-}
-
-.subtitle {
-  font-size: 16px;
-  color: var(--text-sub);
-  margin-bottom: 20px;
-  text-align: center;
-  font-style: italic;
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: var(--primary-red);
-  margin-bottom: 20px;
-  opacity: 0.5;
-}
-
-.cat-title {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  color: var(--primary-red);
-  text-transform: uppercase;
-  margin: 24px 0 12px;
-  text-align: center;
-}
-
-.pill-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.pill-btn {
-  background: var(--card-bg);
-  border: 1px solid var(--primary-red);
-  color: var(--primary-red);
-  padding: 8px 16px;
-  border-radius: 18px;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  display: inline-block;
-  font-family: inherit;
-}
-
-.pill-btn:hover {
-  background: var(--pill-hover-bg);
-  color: var(--pill-hover-text);
 }
 
 .reader-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .prayer-title {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: var(--primary-red);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
 }
 
-/* Forced Dual-Column Side-by-Side View */
+/* Enforced Side-by-Side Dual-Column Layout */
 .dual-columns {
   display: flex !important;
   flex-direction: row !important;
-  gap: 10px !important;
+  gap: 8px !important;
   width: 100% !important;
 }
 
@@ -250,8 +189,8 @@ h1 {
   flex: 1 1 50% !important;
   min-width: 0 !important;
   background: var(--card-bg);
-  padding: 16px 12px;
-  border-radius: 8px;
+  padding: 14px 10px;
+  border-radius: 10px;
   border: 1px solid var(--border-color);
   line-height: var(--reader-line-height);
   font-size: var(--reader-font-size);
@@ -263,30 +202,34 @@ h1 {
 }
 
 .pane-label {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: var(--text-sub);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 4px;
 }
 
-/* Mobile Optimizations */
-@media (max-width: 650px) {
-  :root {
-    --reader-font-size: 15px;
-  }
-  [data-font-size="large"] {
-    --reader-font-size: 17px;
-  }
-  [data-font-size="xlarge"] {
-    --reader-font-size: 19px;
-  }
+/* Pill Buttons for Navigation */
+.pill-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--primary-red);
+  color: var(--primary-red);
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  font-family: inherit;
+}
 
+/* Mobile Tweak */
+@media (max-width: 650px) {
   .app-container {
-    padding: 10px 4px 30px;
+    padding: 12px 4px 30px;
   }
 
   .dual-columns {
@@ -298,7 +241,7 @@ h1 {
   }
 
   .prayer-title {
-    font-size: 22px;
+    font-size: 20px;
     margin-bottom: 12px;
   }
 }
